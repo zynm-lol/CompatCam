@@ -1,0 +1,55 @@
+name: Build Unsigned IPA
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate the Xcode project
+        run: |
+          cd CompatCam
+          xcodegen generate
+
+      - name: Build (unsigned, for iOS device)
+        run: |
+          cd CompatCam
+          xcodebuild \
+            -project CompatCam.xcodeproj \
+            -scheme CompatCam \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            DEVELOPMENT_TEAM="" \
+            build
+
+      - name: Package as .ipa
+        run: |
+          cd CompatCam
+          mkdir -p Payload
+          cp -r build/Build/Products/Release-iphoneos/CompatCam.app Payload/
+          zip -r CompatCam.ipa Payload
+          mkdir -p ../out
+          cp CompatCam.ipa ../out/
+
+      - name: Upload .ipa as a build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CompatCam-unsigned-ipa
+          path: out/CompatCam.ipa
