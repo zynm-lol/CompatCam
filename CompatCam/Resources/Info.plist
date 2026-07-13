@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>NSCameraUsageDescription</key>
+    <string>CompatCam needs camera access to take photos and video, and to run its camera compatibility engine.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>CompatCam needs microphone access to record audio with your videos.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>CompatCam needs Photos access to show your gallery and let you manage saved shots.</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>CompatCam saves the photos and videos you capture to your Photos library.</string>
+    <key>UILaunchScreen</key>
+    <dict/>
+    <key>UIRequiresFullScreen</key>
+    <true/>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+</dict>
+</plist>
