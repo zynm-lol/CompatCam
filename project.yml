@@ -16,9 +16,12 @@ targets:
     type: application
     platform: iOS
     sources:
-      - path: CompatCam
+      - path: .
+        excludes:
+          - "project.yml"
+          - "README.md"
     info:
-      path: CompatCam/Resources/Info.plist
+      path: Resources/Info.plist
       properties:
         UILaunchScreen: {}
     settings:
